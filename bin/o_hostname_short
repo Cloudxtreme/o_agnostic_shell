@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 #
+# requires `o_hostname`
+#
 # prints short hostname
 
-hostname -s
+o_hostname |
+  awk -F. '{ print $1; }'
