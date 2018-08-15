@@ -21,6 +21,7 @@
 
 
 # macOS
+
 ( diskutil list 2>/dev/null | 
   grep ^/ 2>/dev/null | 
   grep "physical" 2>/dev/null |
@@ -29,6 +30,6 @@
 ) 2>/dev/null ||
 
 
-exit 1 # fail
+exit 1 #fail
 
-exit 0 # success
+exit 0 #success
