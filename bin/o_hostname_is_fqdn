@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+#
+# requires `o_hostname_domain`
+#
+# exit code 1 if hostname is not a fqdn (exit code 2 on error)
+
+# is fqdn
+[ $( o_hostname_domain | grep "." ) ] &&
+  echo "$(o_hostname) is not a fully qualified domain name (FQDN)." &&
+  exit 0 ||
+
+# is not fqdn
+echo "$(o_hostname) is not a fully qualified domain name (FQDN)."&& 
+  exit 1 ||
+
+# program error
+
+exit 2
+
+
