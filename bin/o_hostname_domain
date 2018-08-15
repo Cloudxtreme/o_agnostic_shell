@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 #
-# requires o_hostname
+# requires `o_hostname`
 #
 # prints domain name if hostname 
 
