@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+#
+# required `o_hostname_domain`
+#
+# prints top level domain name
+
+o_hostname_domain |
+  rev |
+  awk -F. '{ print $1; }' |
+  rev ||
+  
+exit 1 #fail
+  
+exit 0 #success
