@@ -3,4 +3,8 @@
 #
 # prints full hostname
 
-hostname 
+hostname ||
+
+exit 1 #fail
+
+exit 0 #success
