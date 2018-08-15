@@ -1,0 +1,26 @@
+#!/usr/bin/env sh
+#
+# prints memory in bytes
+
+
+# bsd
+
+sysctl -n hw.realmem 2>/dev/null ||
+
+
+# linux (gnu grep)
+
+( grep "MemTotal" /proc/meminfo |
+  grep --only-matching '[0-9]*' |
+  awk '{ print $1 * 1000; }'
+} 2>/dev/null ||
+
+
+# macOS
+
+sysctl -n hw.memsize 2>/dev/null ||
+  
+  
+exit 1 #fail
+
+exit 0 #success
