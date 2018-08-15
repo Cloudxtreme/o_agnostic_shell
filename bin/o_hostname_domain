@@ -5,7 +5,7 @@
 # prints domain name if hostname 
 
 o_hostname |
-  awk -F. '{ $1=""; OFS="."; print $0 }' |
+  awk -F. '{ $1=""; OFS="."; print $0; }' |
   sed 's/^.//' ||
   
 exit 1 #fail
