@@ -1,2 +1,2 @@
-# o_agnostic_shell
+# Agnostic Shell
 OS Agnostic Shell Commands for Linux and BSD
