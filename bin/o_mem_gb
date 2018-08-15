@@ -1,0 +1,38 @@
+#!/usr/bin/env sh
+#
+# requires `o_mem`
+#
+# prints memory in gigabytes (rounded)
+
+o_mem |
+awk '{
+    x=$1 / 1000000000
+    ival = int(x)    # integer part, int() truncates
+    # see if fractional part
+    if (ival == x)   # no fraction
+      print ival   # ensure no decimals
+    else {
+      if (x < 0) {
+        aval = -x     # absolute value
+        ival = int(aval)
+        fraction = aval - ival
+        if (fraction >= .5)
+          print int(x) - 1   # -2.5 --> -3
+        else
+          print int(x)       # -2.3 --> -2
+      } else {
+        fraction = x - ival
+        if (fraction >= .5)
+          print ival + 1
+        else
+          print ival
+      }
+    }
+  }' ||
+  
+  exit 1 #fail
+  
+  exit 0 #success
+  
+  # rounding function credit:
+  # https://www.gnu.org/software/gawk/manual/html_node/Round-Function.html
