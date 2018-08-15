@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+#
+# required `o_hostname_domain`
+#
+# prints top level domain name
+
+o_hostname |
+  awk '{
+    levels=split( $0, domain_names, "." );
+    reverse_hostname=domain_names[levels];
+    {
+      for( i=levels-1; i>0; i-- ) {
+        reverse_hostname=reverse_hostname"."domain_names[i];
+      }
+    }
+    print reverse_hostname;
+  }' ||
+  
+exit 1 #fail
+  
+exit 0 #success
