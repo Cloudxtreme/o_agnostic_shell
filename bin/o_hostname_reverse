@@ -2,7 +2,7 @@
 #
 # required `o_hostname_domain`
 #
-# prints top level domain name
+# prints reversed hostname
 
 o_hostname |
   awk '{
