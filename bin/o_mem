@@ -18,7 +18,7 @@ sysctl -n hw.realmem 2>/dev/null ||
 
 # macOS
 
-sysctl -n hw.memsize 2>/dev/null ||
+sysctl -n hw.memsize 2>/dev/null || # this number is returning ~68GB on a system with 64GB installed. is it adding swap in or something?
   
   
 exit 1 #fail
