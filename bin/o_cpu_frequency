@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+sysctl -n machdep.tsc_freq 2>/dev/null || # bsd
+
+lscpu | grep "MHz" | awk '{ print $3 * 1000000; }' 2>/dev/null || # linux
+
+exit 1 # fail
+
+exit 0 # success
