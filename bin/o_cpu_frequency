@@ -2,9 +2,15 @@
 #
 # prints cpu frequency in hertz
 
-sysctl -n machdep.tsc_freq 2>/dev/null || #bsd
+# bsd
+sysctl -n machdep.tsc_freq 2>/dev/null ||
 
-lscpu | grep "MHz" | awk '{ print $3 * 1000000; }' 2>/dev/null || #linux
+# linux
+
+( lscpu |
+  grep "MHz" |
+  awk '{ print $3 * 1000000; }'
+) 2>/dev/null ||
 
 exit 1 #fail
 
