@@ -6,7 +6,7 @@
 
 # is fqdn
 [ $( o_hostname_domain | grep "." ) ] &&
-  echo "$(o_hostname) is not a fully qualified domain name (FQDN)." &&
+  echo "$(o_hostname) is a fully qualified domain name (FQDN)." &&
   exit 0 ||
 
 # is not fqdn
