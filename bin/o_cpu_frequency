@@ -2,8 +2,11 @@
 #
 # prints cpu frequency in hertz
 
+
 # bsd
+
 sysctl -n machdep.tsc_freq 2>/dev/null ||
+
 
 # linux
 
@@ -13,6 +16,12 @@ sysctl -n machdep.tsc_freq 2>/dev/null ||
   sort |
   head -1 
 ) 2>/dev/null ||
+
+
+# macos
+
+sysctl -n hw.cpufrequency_max 2>/dev/null ||
+
 
 exit 1 #fail
 
