@@ -11,8 +11,7 @@ sysctl -n hw.realmem 2>/dev/null ||
 # linux (gnu grep)
 
 ( grep "MemTotal" /proc/meminfo |
-  grep --only-matching '[0-9]*' |
-  awk '{ print $1 * 1000; }'
+  awk '{ printf "%d\n", $2 * 1000 }'
 } 2>/dev/null ||
 
 
