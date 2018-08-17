@@ -2,7 +2,7 @@
 #
 # requires `o_hostname_domain`
 #
-# exit code 1 if hostname is not a fqdn (exit code 2 on error)
+# exit code 1 if hostname is not a fqdn
 
 ( o_hostname_domain |
   grep --quiet "."
