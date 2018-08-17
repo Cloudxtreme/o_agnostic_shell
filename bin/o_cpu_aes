@@ -1,0 +1,38 @@
+#!/usr/bin/env sh
+#
+# prints number of processor threads
+
+
+# bsd
+( sysctl dev.
+  | grep --quiet aes 1>/dev/null
+) 2>/dev/null &&
+
+echo "This processor supports AES instructions (hardware acceleration)." &&
+
+exit 0 ||
+
+
+# linux
+
+( lscpu |
+  grep "aes"
+) 2>/dev/null &&
+  
+echo "This processor supports AES instructions (hardware acceleration)." &&
+
+exit 0 ||
+
+
+# macos
+
+[ ! $( sysctl -n hw.optional.aes ) ] && #inversion necessary to translate boolean 1 and 0 to exit code logic
+
+echo "This processor supports AES instructions (hardware acceleration)." &&
+
+exit 0 ||
+
+
+echo "This processor DOES NOT support AES instructions (hardware acceleration)."
+
+exit 1 #not supported or error occurred
