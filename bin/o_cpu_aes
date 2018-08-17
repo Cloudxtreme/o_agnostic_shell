@@ -4,6 +4,7 @@
 
 
 # bsd
+
 ( sysctl dev. |
   grep --quiet "aes"
 ) 2>/dev/null &&
