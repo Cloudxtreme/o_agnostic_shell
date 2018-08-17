@@ -4,8 +4,8 @@
 
 
 # bsd
-( sysctl dev.
-  | grep --quiet "aes"
+( sysctl dev. |
+  grep --quiet "aes"
 ) 2>/dev/null &&
 
 echo "This processor supports AES instructions (hardware acceleration)." &&
