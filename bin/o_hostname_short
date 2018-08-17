@@ -5,7 +5,7 @@
 # prints short hostname
 
 o_hostname |
-  awk -F. '{ print $1; }' ||
+  awk -F. '{ print $1 }' ||
   
 exit 1 #fail
 
