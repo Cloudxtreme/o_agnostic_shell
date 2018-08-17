@@ -7,7 +7,7 @@
 
 ( geom disk list |
   grep "Geom name: " |
-  awk '{ print $3; }' |
+  awk '{ print $3 }' |
   grep --invert-match "cd"
 ) 2>/dev/null ||
 
@@ -15,18 +15,18 @@
 # linux
 
 ( lsblk --all --noheadings --list --output NAME,TYPE |
-  grep disk |
-  awk '{ print $1; }' 
+  grep "disk" |
+  awk '{ print $1 }' 
 ) 2>/dev/null ||
 
 
 # macOS
 
-( diskutil list 2>/dev/null | 
-  grep ^/ 2>/dev/null | 
-  grep "physical" 2>/dev/null |
-  sed 's/\/dev\///g' 2>/dev/null | 
-  awk '{ print $1; }'
+( diskutil list | 
+  grep "^/dev/disk" | 
+  grep "physical" |
+  sed 's/\/dev\///g' | 
+  awk '{ print $1 }'
 ) 2>/dev/null ||
 
 
