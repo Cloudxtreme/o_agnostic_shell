@@ -12,7 +12,7 @@ sysctl -n machdep.tsc_freq 2>/dev/null ||
 
 ( lscpu |
   grep --ignore-case "mhz" |
-  awk '{ print ( $3 + $4 ) * 1000000 }' |
+  awk '{ printf "%d\n" ( $3 + $4 ) * 1000000 }' |
   sort |
   head -1 
 ) 2>/dev/null ||
