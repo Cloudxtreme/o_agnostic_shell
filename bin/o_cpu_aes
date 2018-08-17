@@ -15,7 +15,7 @@ exit 0 ||
 # linux
 
 ( lscpu |
-  grep "aes"
+  grep --quiet "aes"
 ) 2>/dev/null &&
 echo "This processor supports AES instructions (hardware acceleration)." &&
 exit 0 ||
