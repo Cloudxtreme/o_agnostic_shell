@@ -6,7 +6,7 @@
 
 o_hostname_domain |
   rev |
-  awk -F. '{ print $1; }' |
+  awk -F. '{ print $1 }' |
   rev ||
   
 exit 1 #fail
