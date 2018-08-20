@@ -1,0 +1,10 @@
+
+#!/usr/bin/env sh
+#
+# generates UUID
+
+uuidgen ||
+
+exit 1 #fail
+
+exit 0 #success
