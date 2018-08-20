@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+#
+# prints mac addresses of all network interfaces
+
+ifconfig -a |
+  grep "ether" |
+  awk '{ print $2 }' |
+  sort |
+  uniq ||
+  
+exit 1 #fail
+
+exit 0 #success
