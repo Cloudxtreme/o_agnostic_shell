@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+#
+# prints all network interfaces
+
+
+( ifconfig -a |
+  sed 's/[[:space:]].*//;/^$/d' |
+  grep --invert-match ^lo |
+  sed 's/://g'
+) 2>/dev/null ||
+
+
+# the `ifconfig` method should work for everything, but below are some other methods in case that changes in the future
+
+# # linux (network manager required)
+# nmcli -terse -mode tabular -fields GENERAL.DEVICE device show 2>/dev/null ||
+
+
+# # macos
+# ( networksetup -listallhardwareports |
+#   grep "Device:" |
+#   awk '{ print $2 }'
+# ) 2>/dev/null ||
+
+
+exit 1 #fail
+  
+exit 0 #success
