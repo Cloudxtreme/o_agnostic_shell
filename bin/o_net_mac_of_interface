@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+#
+# prints mac addresses of provided interface
+
+ifconfig -a |
+  grep --after-context=2 $1 |
+  grep "ether" |
+  awk '{ print $2 }' |
+  grep --invert-match ^-- |
+  sort |
+  uniq ||
+
+exit 1 #fail
+
+exit 0 #success
