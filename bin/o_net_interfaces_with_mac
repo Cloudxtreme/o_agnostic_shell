@@ -7,7 +7,9 @@ ifconfig -a |
   grep --invert-match ^[[:space:]] |
   grep --invert-match ^-- |
   awk '{ print $1 }' |
-  sed 's/://g' ||
+  sed 's/://g' |
+  sort |
+  uniq ||
   
 exit 1 #fail
   
