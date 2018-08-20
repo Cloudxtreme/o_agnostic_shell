@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+#
+# prints all ip addresses
+
+ifconfig -a |
+  grep ^[[:space:]]inet[[:space:]] |
+  awk '{ print $2 }' |
+  grep --invert-match ^127 |
+  sort |
+  uniq ||
+  
+exit 1 #fail
+
+exit 0 #success
