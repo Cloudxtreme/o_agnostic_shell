@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+#
+# prints network interfaces with provided mac address
+
+ifconfig -a |
+  grep --before-context=2 $1 |
+  grep --invert-match ^[[:space:]] |
+  grep --invert-match ^-- |
+  awk '{ print $1 }' |
+  sed 's/://g' ||
+  
+exit 1 #fail
+  
+exit 0 #success
