@@ -2,27 +2,24 @@
 #
 # prints all network interfaces
 
-
-( ifconfig -a |
-  sed 's/[[:space:]].*//;/^$/d' |
-  grep --invert-match ^lo |
-  sed 's/://g'
-) 2>/dev/null ||
-
-
-# the `ifconfig` method should work for everything, but below are some other methods in case that changes in the future
-
-# # linux (network manager required)
-# nmcli -terse -mode tabular -fields GENERAL.DEVICE device show 2>/dev/null ||
-
-
-# # macos
-# ( networksetup -listallhardwareports |
-#   grep "Device:" |
-#   awk '{ print $2 }'
-# ) 2>/dev/null ||
-
+ifconfig -a |
+  sed 's/[[:space:]].*//;
+    /^$/d;
+    s/://g' |
+  grep --invert-match ^lo ||
 
 exit 1 #fail
   
 exit 0 #success
+
+# the `ifconfig` method should work for everything, but below are some other methods in case that changes in the future
+#
+# # linux (network manager required)
+# nmcli -terse -mode tabular -fields GENERAL.DEVICE device show
+#
+#
+# # macos
+# ( networksetup -listallhardwareports |
+#   grep "Device:" |
+#   awk '{ print $2 }'
+# )
