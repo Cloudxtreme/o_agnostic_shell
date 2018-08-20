@@ -2,11 +2,13 @@
 #
 # prints all network interfaces
 
-ifconfig -a |
-  sed 's/[[:space:]].*//;
-    /^$/d;
-    s/://g' |
-  grep --invert-match ^lo ||
+ifconfig -a | 
+  grep --invert-match ^[[:space:]] |
+  awk '{ print $1 }' |
+  sed 's/://g' |
+  grep --invert-match ^lo |
+  sort |
+  uniq ||
 
 exit 1 #fail
   
