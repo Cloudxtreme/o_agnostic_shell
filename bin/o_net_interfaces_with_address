@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+#
+# prints all interface(s) with provided mac or ip address
+
+ifconfig -a |
+  grep --before-context=4 $1 |
+  grep --invert-match ^[[:space:]] |
+  grep --invert-match ^-- |
+  awk '{ print $1 }' |
+  sed 's/://g' |
+  sort |
+  uniq ||
+  
+exit 1 #fail
+  
+exit 0 #success
