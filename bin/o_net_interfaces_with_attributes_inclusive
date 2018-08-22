@@ -1,0 +1,72 @@
+#!/usr/bin/env sh
+#
+# prints all interface(s) with provided mac or ip address
+
+# no arguments
+[ -z $1 ] &&
+
+ifconfig -a | 
+  grep --invert-match ^[[:space:]] |
+  awk '{ print $1 }' |
+  sed 's/://g' |
+  grep --invert-match ^lo |
+  sort |
+  uniq ||
+
+# increment through arguments
+for arg in $@ ; do
+
+  #case insensitive
+  arg=$(
+      echo "${arg}" |
+      awk '{ print tolower($0) }'
+    )
+    
+  # calculate number of matches
+  matches=$(
+      ifconfig -a |
+      awk '{ print tolower($0) }' |
+      grep --invert-match ^lo |
+      sed -n "/${arg}/=" |
+      wc -l ||
+      break && exit 1
+    )
+  
+  # if matches exist
+  [ "${matches}" -gt 0 ] &&
+  
+  # increment through matches to argument
+  for i in $( seq 1 "${matches}" ); do
+  
+    # calculate match location (line number)
+    match_location=$(
+        ifconfig -a |
+        awk '{ print tolower($0) }' |
+        grep --invert-match ^lo |
+        sed -n "/${arg}/=" |
+        sed -n ${i}p ||
+        break 2 && exit 1
+      )
+  
+    # print matched interface
+    ifconfig -a |
+      grep --invert-match ^lo |
+      sed '1,'"${match_location}"'!d' |
+      grep --invert-match ^[[:space:]] |
+      tail -1 |
+      awk '{ print $1 }' |
+      sed 's/://' ||
+
+    break 2 && exit 1 #fail
+
+  done 
+  
+done |
+
+# sanity check
+sort |
+uniq ||
+
+exit 1 #fail
+  
+exit 0 #success
